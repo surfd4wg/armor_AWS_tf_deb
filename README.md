@@ -38,6 +38,7 @@ To run this terraform script:
 5) terraform apply
 To destroy the same - remove everything from AWS EC2:
 6) terraform destroy 
+
 Ref: 
 https://www.terraform.io/docs/cli/commands/get.html
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs
