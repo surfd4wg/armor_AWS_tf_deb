@@ -20,7 +20,7 @@ data "aws_ami" "debian" {
 
         tomap(
           {"Zoo" = "AWS Zoofarm"
-          "RESOURCE" = "ubuntu server"
+          "RESOURCE" = "debian server"
           }
         )
         )
