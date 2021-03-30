@@ -9,10 +9,13 @@ The variables in variables.tf must be modified to contain your specific settings
 
 Once the Machine is running in AWS EC2... you will see the username and password credentials in the /rdpcreds.txt file. 
 This user has sudo privileges so !!**** please change your password for this user, the ubuntu user and also the root user ****!!
+
 If you want to RDP into the machine you will need to install debian desktop. 
 https://linuxize.com/post/how-to-install-xrdp-on-debian-10/
 https://wiki.debian.org/DebianDesktop
-In that case you will need a machine bigger than t2.micro. You can remote desktop in using the Public DNS (IPv4) address in the EC2 console, for the instance. You will need to download an RDP client. https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients
+
+In that case you will need a machine bigger than t2.micro. You can remote desktop in using the Public DNS (IPv4) address in the EC2 console, for the instance. You will need to download an RDP client. 
+https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients
 
 SSH into the machine using the Public DNS (IPv4) address in the EC2 console, for the instance, and your private key. 
 ssh -i ~/.ssh/(keyfile).pem admin@ec2-X-X-X-X.compute-1.amazonaws.com
@@ -42,12 +45,13 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 -----
 ThThe appropriate user names (According to AWS) are as follows:
 
-For Amazon Linux 2 or the Amazon Linux AMI, the user name is "ec2-user".
-For a CentOS AMI, the user name is "centos".
-For a Debian AMI, the user name is "admin".
-For a Fedora AMI, the user name is "ec2-user" or "fedora".
-For a RHEL AMI, the user name is "ec2-user" or "root".
-For a SUSE AMI, the user name is "ec2-user" or "root".
-For an Ubuntu AMI, the user name is "ubuntu".
+1) For Amazon Linux 2 or the Amazon Linux AMI, the user name is "ec2-user".
+2) For a CentOS AMI, the user name is "centos".
+3) For a Debian AMI, the user name is "admin".
+4) For a Fedora AMI, the user name is "ec2-user" or "fedora".
+5) For a RHEL AMI, the user name is "ec2-user" or "root".
+6) For a SUSE AMI, the user name is "ec2-user" or "root".
+7) For an Ubuntu AMI, the user name is "ubuntu".
+
 Otherwise, if ec2-user and root don't work, check with the AMI provider. 
 Ref: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
