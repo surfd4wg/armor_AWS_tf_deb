@@ -1,0 +1,70 @@
+variable "region" {
+  description = "AWS Region to use"  
+  default = "us-east-1"
+}
+
+variable "avail_zone" {
+  description = "AWS Availability zone"
+  default = "us-east-1a"
+}
+
+variable "public_key_path" {
+  description = "Path to the public SSH key you want to bake into the instance."
+  default     = "~/.ssh/(keyfile).pub"
+}
+
+variable "private_key_path" {
+  description = "Path to the private SSH key, used to access the instance."
+  default     = "~/.ssh/(keyfile).pem"
+}
+
+variable "project_name" {
+  description = "<your org name> terraform ARMOR aws DEMO"
+  default     = "terraformARMORaws"
+}
+
+variable "ssh_user" {
+  description = "SSH user name to connect to your instance."
+  default     = "admin"
+}
+
+variable "access_key" {
+  description = "Access Key to AWS account"
+  default     = "XXXXX"
+}
+
+variable "secret_key" {
+  description = "Secret Key to AWS account"
+  default     = "XXXXX"
+}
+
+variable "myname" {
+  description = "Default Name tag for AWS Resources"
+  default     = "YourCoName"
+}
+
+variable "mydept" {
+  description = "Default Deapartment tag for AWS Resources"
+  default     = "Solutions Engineering"
+}
+
+variable "myorg" {
+  description = "Default Organization tag for AWS Resources"
+  default     = "https://armor.com, Armor Defense, Inc."
+}
+
+variable "mystack" {
+  description = "Default Stack tag for AWS Resources"
+  default     = "SE Demo"
+}
+
+variable "myenv" {
+  description = "Default Env tag for AWS Resources"
+  default     = "YourOrg"
+}
+
+variable "ami_id" {
+  description = "Random id generator"
+  default     = 1234567890
+}
+
