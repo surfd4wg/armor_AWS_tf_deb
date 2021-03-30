@@ -38,7 +38,7 @@ sudo echo "WHO I AM:"$WHOIAM
 #--- Armor Agent ---
 #mkdir -p /home/ubuntu/armor
 #cd /home/ununtu/armor
-sudo curl -sSL https://agent.armor.com/latest/armor_agent.sh | sudo bash /dev/stdin -l BCDHC-FKWCQ-6J6JP-PBPF4-DWCPM -r us-west-armor -f
+sudo curl -sSL https://agent.armor.com/latest/armor_agent.sh | sudo bash /dev/stdin -l XXXXX-XXXXX-XXXXX-XXXXX-XXXXX -r us-west-armor -f
 
 #--- Metadata and index.html files ---
 PRETTYpretty=$(cat /etc/os-release | awk -F '=' '/^PRETTY_NAME/{print $2}' | tr -d '"')
