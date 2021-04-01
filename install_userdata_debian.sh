@@ -1,5 +1,36 @@
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
 #!/bin/bash
+/bin/echo "Hello World" >> /tmp/userdata-test.txt
+--//
+#!/bin/bash
+banner()
+{
+  echo "+------------------------------------------+"
+  printf "| %-40s |\n" "`date`"
+  echo "|                                          |"
+  printf "|`tput bold` %-40s `tput sgr0`|\n" "$@"
+  echo "+------------------------------------------+"
+}
 #--- apache ---
+banner "Installing Apache2"
 sudo apt-get update
 sudo apt-get install -y apache2
 sudo systemctl start apache2
@@ -11,6 +42,7 @@ echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 #sudo systemctl start nginx
 #sudo systemctl enable nginx
 #--- curl and jq ---
+banner "Installing curl, wget, jq, nano, pwgen"
 sudo apt-get -y install curl unzip
 sudo apt-get -y install jq
 #--- Chrome ---
@@ -29,6 +61,7 @@ sudo usermod -aG sudo $USERNAME
 sudo apt -y install pwgen
 sudo grep $USERNAME /etc/passwd >> $HOME/usercreds.txt
 PASSWORD=$(pwgen -ys 15 1)
+banner "Creating user:$USERNAME pass:$PASSWORD for rdp"
 sudo echo $USERNAME:$PASSWORD | sudo chpasswd
 sudo echo "Username:"$USERNAME, "Password:"$PASSWORD >> $HOME/rdpcreds.txt
 sudo echo "Home:"$HOME,"Username:"$USERNAME, "Password:"$PASSWORD
@@ -36,17 +69,17 @@ WHOIAM=$(whoami)
 sudo echo "WHO I AM:"$WHOIAM
 
 #--- Armor Agent ---
-#mkdir -p /home/ubuntu/armor
-#cd /home/ununtu/armor
-sudo curl -sSL https://agent.armor.com/latest/armor_agent.sh | sudo bash /dev/stdin -l XXXXX-XXXXX-XXXXX-XXXXX-XXXXX -r us-west-armor -f
+banner "Installing the Armor Agent"
+sudo curl -sSL https://agent.armor.com/latest/armor_agent.sh | sudo bash /dev/stdin -l BCDHC-FKWCQ-6J6JP-PBPF4-DWCPM -r us-west-armor -f
 
 #--- Metadata and index.html files ---
+
 PRETTYpretty=$(cat /etc/os-release | awk -F '=' '/^PRETTY_NAME/{print $2}' | tr -d '"')
 #GET distro type and CREATE default index.html file
 sudo echo "Linux Distribution :"$PRETTYpretty
 WORKINGDIRECTORY=$(pwd)
 sudo echo "WORKING DIR:"$WORKINGDIRECTORY
-
+banner "Generating webserver metadata"
 case "$PRETTYpretty" in
   *Ubuntu*)
     wget -N https://armorscripts.s3.amazonaws.com/BASHscripts/ansiart/ascii-art-ubuntu.ans 2>/dev/null

@@ -1,6 +1,6 @@
 locals {
     common_tags = {
-        Name = "${var.myname}-${random_id.server.hex}" 
+#        Name = "${var.myname}-${random_id.server.hex}" 
 	Environment = var.myenv
         Department  = var.mydept
         Organization = var.myorg

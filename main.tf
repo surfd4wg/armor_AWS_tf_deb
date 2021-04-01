@@ -20,7 +20,7 @@ data "aws_ami" "debian" {
 
         tomap(
           {"Zoo" = "AWS Zoofarm"
-          "RESOURCE" = "debian server"
+          "RESOURCE" = "ubuntu server"
           }
         )
         )
@@ -46,7 +46,8 @@ resource "aws_instance" "webserver" {
 
         tomap(
           {"Zoo" = "AWS Zoofarm"
-          "RESOURCE" = "webserver AMI"
+           "Name" = "${var.myname}-${random_id.server.hex}-${count.index + 1}"
+           "RESOURCE" = "webserver AMI"
           }
         )
         )
@@ -58,6 +59,7 @@ resource "aws_instance" "webserver" {
   subnet_id                   = aws_subnet.main.id
   associate_public_ip_address = true
   user_data = "${file("install_userdata_debian.sh")}"
+  count = var.instance_count
 #  provisioner "remote-exec" {
 #    inline = [
 #      "sudo apt update",

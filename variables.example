@@ -40,7 +40,7 @@ variable "secret_key" {
 
 variable "myname" {
   description = "Default Name tag for AWS Resources"
-  default     = "YourCoName"
+  default     = "Debian"
 }
 
 variable "mydept" {

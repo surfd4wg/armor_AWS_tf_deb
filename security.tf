@@ -45,7 +45,7 @@ resource "aws_network_acl" "allowall" {
 }
 
 resource "aws_security_group" "allowall" {
-#  name        = "VPCcraig Allow All"
+  name        = "secgroup-${var.myname}-${random_id.server.hex}"
   description = "Allows All traffic"
   vpc_id      = aws_vpc.main.id
   tags = merge(
